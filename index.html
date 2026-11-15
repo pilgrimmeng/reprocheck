@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>ReproCheck | Research package preflight</title>
+<link rel="stylesheet" href="style.css">
+<script src="audit.js" defer></script>
+<script src="demos.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="top"><div class="shell bar"><strong><span class="mark" aria-hidden="true">R</span> ReproCheck</strong><span class="pill"><span></span> OFFLINE • PRIVATE</span></div></header>
+<main class="shell">
+  <section class="intro">
+    <div class="eyebrow"><span>01</span> RESEARCH PACKAGE PREFLIGHT</div>
+    <h1>Can someone else<br> <em>find what they need?</em></h1>
+    <p>Check your reproducibility ZIP before handoff. Find missing documentation and trace every declared figure to its data and generating script.</p>
+    <div class="details"><span>01 &nbsp; Documentation</span><span>02 &nbsp; Analysis settings</span><span>03 &nbsp; Figure lineage</span></div>
+  </section>
+  <section class="work" aria-label="Reproducibility preflight">
+    <div class="input panel">
+      <header><p class="kicker">01 / INPUT</p><h2>Open a package</h2></header>
+      <label id="drop" for="archive"><span class="up" aria-hidden="true">↑</span><strong>Choose or drop a ZIP</strong><small>Up to 32 MiB • stays on this device</small><input type="file" id="archive" accept=".zip,application/zip"></label>
+      <p class="kicker demo-label">TRY WITH SYNTHETIC DATA</p>
+      <div class="demos"><button id="demo-good" type="button"><span class="demo-icon good">✓</span><span>Complete example</span><span class="chevron">›</span></button>
+      <button id="demo-gap" type="button"><span class="demo-icon gap">!</span><span>Example with gaps</span><span class="chevron">›</span></button></div>
+      <details><summary>How to declare figure links</summary><p>Add <code>repro-manifest.json</code> next to the project README. Paths are relative to that folder.</p>
+      <pre>{
+  "version": 1,
+  "figures": [{
+    "figure": "figures/fig1.svg",
+    "data": "data/example.csv",
+    "script": "scripts/plot.py"
+  }]
+}</pre><button id="export-template" class="secondary" type="button">Download template</button></details>
+    </div>
+    <div class="output panel">
+      <header><p class="kicker">02 / FINDINGS</p><h2>Audit report</h2></header>
+      <div id="status" role="status" aria-live="polite"></div>
+      <div id="empty"><span aria-hidden="true" class="empty-icon">◎</span><strong>No package open</strong><p>Choose a ZIP or run an example to see the package checks here.</p></div>
+      <section id="report" hidden aria-label="Report">
+        <div id="summary"></div><ul id="results"></ul>
+        <div class="exports"><button type="button" id="export-md">Download Markdown</button><button type="button" id="export-json" class="secondary">Download JSON</button></div>
+      </section>
+    </div>
+  </section>
+  <footer><strong>Structure is not reproducibility.</strong> These checks inspect archive metadata and declared paths; they do not run code or establish the validity of research findings.</footer>
+</main>
+</body>
+</html>
